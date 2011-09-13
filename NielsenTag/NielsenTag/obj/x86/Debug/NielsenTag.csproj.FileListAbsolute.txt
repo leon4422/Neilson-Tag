@@ -1,0 +1,5 @@
+C:\Users\leon4422\Documents\NeilsenTag\NielsenTag\NielsenTag\bin\Debug\NielsenTag.exe
+C:\Users\leon4422\Documents\NeilsenTag\NielsenTag\NielsenTag\bin\Debug\NielsenTag.pdb
+C:\Users\leon4422\Documents\NeilsenTag\NielsenTag\NielsenTag\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\leon4422\Documents\NeilsenTag\NielsenTag\NielsenTag\obj\x86\Debug\NielsenTag.exe
+C:\Users\leon4422\Documents\NeilsenTag\NielsenTag\NielsenTag\obj\x86\Debug\NielsenTag.pdb
