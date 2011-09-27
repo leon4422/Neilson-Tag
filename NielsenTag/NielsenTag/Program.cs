@@ -1,55 +1,36 @@
 ﻿using System;
-using System.IO;
-using System.Net;
-using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-
-/// <summary>
-/// Fetches a Web Page
-/// </summary>
-class WebFetch
+namespace NielsenTag
 {
-    static void Main(string[] args)
+    class Program
     {
-        // used to build entire input
-        StringBuilder sb = new StringBuilder();
-
-        // used on each read operation
-        byte[] buf = new byte[8192];
-
-        // prepare the web page we will be asking for
-        HttpWebRequest request = (HttpWebRequest)
-            WebRequest.Create("http://www.csee.usf.edu/~christen/class6/class6.html");
-
-        // execute the request
-        HttpWebResponse response = (HttpWebResponse)
-            request.GetResponse();
-
-        // we will read data via the response stream
-        Stream resStream = response.GetResponseStream();
-
-        string tempString = null;
-        int count = 0;
-
-        do
+        static void Main(String []args)//TODO: use commandline to get website
         {
-            // fill the buffer with data
-            count = resStream.Read(buf, 0, buf.Length);
-
-            // make sure we read some data
-            if (count != 0)
-            {
-                // translate from bytes to ASCII text
-                tempString = Encoding.ASCII.GetString(buf, 0, count);
-
-                // continue building the string
-                sb.Append(tempString);
-            }
+            Console.WriteLine("Hello World\n");
+            String website = "http://www.nielsen.com/us/en.html";
+            //"http://secure-us.imrworldwide.com/cgi-bin/m?ci=us-801796h&amp;cg=0&amp;cc=1&amp;si=http://www.foxnews.com/&amp;ts=noscript&amp;rnd=1316607490"
+            Match m;//"http://<domain>/[priv|cgi]-bin/[m|k|g|j|i|w|a|b|s|o]?<query_string>";
+            //m=Regex.Matches(WebFetch.PageSource(website),"((?::\\/{2}[\\w]+)(?:[\\/|\\.]?)(?:[^\\s\"]*))",RegexOptions.Multiline);
+            m = Regex.Match(WebFetch.PageSource(website), @"(\S*)/([m|k|g|j|i|w|a|b|s|o])/(\S*)");
+            //Console.WriteLine(WebFetch.HeaderInfo(website));
+           /* if (m.Success)
+            {*/
+                /*foreach (Match g in m)
+                {
+                    Console.WriteLine(g.Groups[1].Value);
+                }
+           /* }
+            else
+                Console.WriteLine("Fail!!");*/
+            if (m.Success)
+                Console.WriteLine(m.Groups[1].Value);
+            else
+                Console.WriteLine("Failed!");
+            Console.WriteLine("Program End!");
+            Console.ReadLine();
         }
-        while (count > 0); // any more data to read?
-
-        // print out page source
-        Console.WriteLine(sb.ToString());
-        Console.ReadLine();
     }
 }
